@@ -1,15 +1,19 @@
 package com.walterbs.businesscard
 
 import android.app.LocaleConfig
+import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.drawable.PaintDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,7 +35,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -177,8 +184,9 @@ fun Texts(title: String, subTitle: String) {
 }
 
 @Composable
-fun GithubLink() {
+fun GithubLink(link: String) {
     val configuration = LocalConfiguration.current
+    val context = LocalContext.current
     when (configuration.orientation) {
         android.content.res.Configuration.ORIENTATION_PORTRAIT -> {
             Row(
@@ -193,10 +201,14 @@ fun GithubLink() {
                         .padding(end = 10.dp)
                 )
                 Text(
-                    text = "https://github.com/WalterSiqueira",
+                    text = link,
                     fontSize = 20.sp,
                     modifier = Modifier
-                        .padding(top = 5.dp),
+                        .padding(top = 5.dp)
+                        .clickable {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                            context.startActivity(intent)
+                        },
                     textAlign = TextAlign.Center,
                     color = Color(0xFFFFFFFF)
                 )
@@ -215,10 +227,14 @@ fun GithubLink() {
                         .padding(end = 10.dp)
                 )
                 Text(
-                    text = "https://github.com/WalterSiqueira",
+                    text = link,
                     fontSize = 24.sp,
                     modifier = Modifier
-                        .padding(top = 5.dp),
+                        .padding(top = 5.dp)
+                        .clickable {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                            context.startActivity(intent)
+                        },
                     textAlign = TextAlign.Center,
                     color = Color(0xFFFFFFFF)
                 )
@@ -228,8 +244,10 @@ fun GithubLink() {
 }
 
 @Composable
-fun GmailLink() {
+fun GmailLink(link: String) {
     val configuration = LocalConfiguration.current
+    val context = LocalContext.current
+    val clipboardManager = LocalClipboardManager.current
     when (configuration.orientation) {
         android.content.res.Configuration.ORIENTATION_PORTRAIT -> {
             Row(
@@ -244,10 +262,14 @@ fun GmailLink() {
                         .padding(end = 10.dp)
                 )
                 Text(
-                    text = "walterbarbozasiqueira@gmail.com",
+                    text = link,
                     fontSize = 20.sp,
                     modifier = Modifier
-                        .padding(top = 5.dp),
+                        .padding(top = 5.dp)
+                        .clickable {
+                            clipboardManager.setText((androidx.compose.ui.text.AnnotatedString(link)))
+                            Toast.makeText(context, "Email copiado!", Toast.LENGTH_SHORT).show()
+                        },
                     textAlign = TextAlign.Center,
                     color = Color(0xFFFFFFFF)
                 )
@@ -266,10 +288,14 @@ fun GmailLink() {
                         .padding(end = 10.dp)
                 )
                 Text(
-                    text = "walterbarbozasiqueira@gmail.com",
+                    text = link,
                     fontSize = 24.sp,
                     modifier = Modifier
-                        .padding(top = 5.dp),
+                        .padding(top = 5.dp)
+                        .clickable {
+                            clipboardManager.setText((androidx.compose.ui.text.AnnotatedString(link)))
+                            Toast.makeText(context, "Email copiado!", Toast.LENGTH_SHORT).show()
+                        },
                     textAlign = TextAlign.Center,
                     color = Color(0xFFFFFFFF)
                 )
@@ -295,8 +321,8 @@ fun Links() {
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    GithubLink()
-                    GmailLink()
+                    GithubLink("https://github.com/WalterSiqueira")
+                    GmailLink("walterbarbozasiqueira@gmail.com")
                 }
             }
         }
@@ -313,8 +339,8 @@ fun Links() {
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    GithubLink()
-                    GmailLink()
+                    GithubLink("https://github.com/WalterSiqueira")
+                    GmailLink("walterbarbozasiqueira@gmail.com")
                 }
             }
         }
