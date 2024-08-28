@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -45,6 +46,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import com.walterbs.businesscard.components.MenuBtn
 import com.walterbs.businesscard.ui.theme.BusinessCardTheme
 
 class MainActivity : ComponentActivity() {
@@ -76,7 +78,7 @@ fun AppTitle(title: String) {
                 textAlign = TextAlign.Center,
                 color = Color(0xFFFFFFFF),
                 modifier = Modifier
-                    .padding(top = 15.dp)
+                    .padding(top = 5.dp)
             )
         }
         android.content.res.Configuration.ORIENTATION_LANDSCAPE -> {
@@ -86,7 +88,7 @@ fun AppTitle(title: String) {
                 textAlign = TextAlign.Center,
                 color = Color(0xFFFFFFFF),
                 modifier = Modifier
-                    .padding(top = 15.dp)
+                    .padding(top = 0.dp)
             )
         }
     }
@@ -268,7 +270,9 @@ fun GmailLink(link: String) {
                         .padding(top = 5.dp)
                         .clickable {
                             clipboardManager.setText((androidx.compose.ui.text.AnnotatedString(link)))
-                            Toast.makeText(context, "Email copiado!", Toast.LENGTH_SHORT).show()
+                            Toast
+                                .makeText(context, "Email copiado!", Toast.LENGTH_SHORT)
+                                .show()
                         },
                     textAlign = TextAlign.Center,
                     color = Color(0xFFFFFFFF)
@@ -294,7 +298,9 @@ fun GmailLink(link: String) {
                         .padding(top = 5.dp)
                         .clickable {
                             clipboardManager.setText((androidx.compose.ui.text.AnnotatedString(link)))
-                            Toast.makeText(context, "Email copiado!", Toast.LENGTH_SHORT).show()
+                            Toast
+                                .makeText(context, "Email copiado!", Toast.LENGTH_SHORT)
+                                .show()
                         },
                     textAlign = TextAlign.Center,
                     color = Color(0xFFFFFFFF)
@@ -356,9 +362,13 @@ fun MainContent() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxSize() // Preenche toda a tela
+                    .padding(top = 25.dp)
                     .verticalScroll(rememberScrollState()) // Permite rolagem se o conteúdo exceder a tela
             ) {
-                AppTitle(title = "Business Card")
+                Row {
+                    AppTitle(title = "Business Card")
+                    MenuBtn()
+                }
                 ProfPic()
                 Texts(title = "Walter Siqueira", subTitle = "Mobile Developer")
                 Links()
@@ -371,7 +381,16 @@ fun MainContent() {
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
             ) {
-                AppTitle(title = "Business Card")
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 20.dp)
+                ) {
+                    AppTitle(title = "Business Card")
+                    MenuBtn()
+                }
                 Row {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
