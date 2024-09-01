@@ -78,7 +78,7 @@ fun AppTitle(title: String) {
                 textAlign = TextAlign.Center,
                 color = Color(0xFFFFFFFF),
                 modifier = Modifier
-                    .padding(top = 5.dp)
+                    .padding(top = 15.dp)
             )
         }
         android.content.res.Configuration.ORIENTATION_LANDSCAPE -> {
@@ -318,7 +318,7 @@ fun Links() {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 150.dp, bottom = 16.dp, start = 25.dp),
+                    .padding(top = 100.dp, bottom = 16.dp, start = 20.dp),
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -410,7 +410,7 @@ fun MainContent() {
 
 @Preview(
     showBackground = true,
-    device = "spec:width=411dp,height=900dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape"
+//    device = "spec:width=411dp,height=900dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape"
 )
 @Composable
 fun Preview() {
