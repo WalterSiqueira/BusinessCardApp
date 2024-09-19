@@ -362,7 +362,6 @@ fun MainContent() {
             ) {
                 Row {
                     AppTitle(title = "Business Card")
-                    MenuBtn()
                 }
                 ProfPic()
                 Texts(title = "Walter Siqueira", subTitle = "Mobile Developer")
@@ -384,7 +383,6 @@ fun MainContent() {
                         .padding(top = 20.dp)
                 ) {
                     AppTitle(title = "Business Card")
-                    MenuBtn()
                 }
                 Row {
                     Column(
@@ -405,7 +403,7 @@ fun MainContent() {
 
 @Preview(
     showBackground = true,
-//    device = "spec:width=411dp,height=900dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape"
+    device = "spec:width=411dp,height=900dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape"
 )
 @Composable
 fun Preview() {
