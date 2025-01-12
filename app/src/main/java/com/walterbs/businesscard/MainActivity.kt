@@ -94,7 +94,7 @@ fun ProfPic() {
                 painter = painterResource(id = R.drawable.profile),
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(top = 230.dp)
+                    .padding(top = 180.dp)
                     .clip(RoundedCornerShape(50.dp))
             )
         }
@@ -239,6 +239,67 @@ fun GithubLink(link: String) {
 
 @SuppressLint("SwitchIntDef")
 @Composable
+fun linkTree(link: String) {
+    val configuration = LocalConfiguration.current
+    val context = LocalContext.current
+    when (configuration.orientation) {
+        android.content.res.Configuration.ORIENTATION_PORTRAIT -> {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.icons8_linktree_96),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize(0.13f)
+                        .padding(end = 10.dp)
+                )
+                Text(
+                    text = link,
+                    fontSize = 20.sp,
+                    modifier = Modifier
+                        .padding(top = 5.dp)
+                        .clickable {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                            context.startActivity(intent)
+                        },
+                    textAlign = TextAlign.Center,
+                    color = Color(0xFFFFFFFF)
+                )
+            }
+        }
+        android.content.res.Configuration.ORIENTATION_LANDSCAPE -> {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.icons8_linktree_96),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize(0.13f)
+                        .padding(end = 10.dp)
+                )
+                Text(
+                    text = link,
+                    fontSize = 24.sp,
+                    modifier = Modifier
+                        .padding(top = 5.dp)
+                        .clickable {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                            context.startActivity(intent)
+                        },
+                    textAlign = TextAlign.Center,
+                    color = Color(0xFFFFFFFF)
+                )
+            }
+        }
+    }
+}
+
+@SuppressLint("SwitchIntDef")
+@Composable
 fun GmailLink(link: String) {
     val configuration = LocalConfiguration.current
     val context = LocalContext.current
@@ -312,7 +373,7 @@ fun Links() {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 100.dp, bottom = 16.dp, start = 20.dp),
+                    .padding(top = 80.dp, bottom = 16.dp, start = 20.dp),
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -323,6 +384,7 @@ fun Links() {
                 ) {
                     GithubLink("https://github.com/WalterSiqueira")
                     GmailLink("walterbarbozasiqueira@gmail.com")
+                    linkTree(link = "https://linktr.ee/WalterBSiqueira")
                 }
             }
         }
@@ -341,6 +403,7 @@ fun Links() {
                 ) {
                     GithubLink("https://github.com/WalterSiqueira")
                     GmailLink("walterbarbozasiqueira@gmail.com")
+                    linkTree(link = "https://t.co/gfDUMJHh62")
                 }
             }
         }
@@ -403,7 +466,7 @@ fun MainContent() {
 
 @Preview(
     showBackground = true,
-    device = "spec:width=411dp,height=900dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape"
+//    device = "spec:width=411dp,height=900dp,dpi=420,isRound=false,chinSize=0dp,orientation=landscape"
 )
 @Composable
 fun Preview() {
