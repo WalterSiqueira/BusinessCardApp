@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -27,9 +28,21 @@ fun DrawerContent(navController: NavController, modifier: Modifier = Modifier) {
                 text = "Home",
                 fontSize = 35.sp,
                 color = Color.White,
+                textAlign = TextAlign.Center,
                 modifier = Modifier
                     .clickable { navController.navigate("home") }
-                    .padding(16.dp)
+                    .padding(25.dp)
+                    .fillMaxWidth()
+            )
+            Text(
+                text = "Experiences",
+                fontSize = 35.sp,
+                color = Color.White,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .clickable { navController.navigate("experiences") }
+                    .padding(25.dp)
+                    .fillMaxWidth()
             )
         }
     }

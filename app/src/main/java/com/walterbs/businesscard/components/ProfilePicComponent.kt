@@ -3,6 +3,7 @@ package com.walterbs.businesscard.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,8 +23,9 @@ fun ProfPic() {
                 painter = painterResource(id = R.drawable.profile),
                 contentDescription = null,
                 modifier = Modifier
-                    .padding(top = 180.dp)
+                    .padding(top = 150.dp)
                     .clip(RoundedCornerShape(50.dp))
+                    .size(250.dp, 250.dp)
             )
         }
         android.content.res.Configuration.ORIENTATION_LANDSCAPE -> {
