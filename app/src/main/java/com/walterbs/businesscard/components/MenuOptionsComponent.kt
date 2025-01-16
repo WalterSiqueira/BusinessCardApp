@@ -1,5 +1,6 @@
 package com.walterbs.businesscard.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ fun DrawerContent(navController: NavController, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .clickable { navController.navigate("home") }
                     .padding(25.dp)
+                    .border(2.dp, Color.Black)
                     .fillMaxWidth()
             )
             Text(
@@ -42,6 +44,7 @@ fun DrawerContent(navController: NavController, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .clickable { navController.navigate("experiences") }
                     .padding(25.dp)
+                    .border(2.dp, Color.Black)
                     .fillMaxWidth()
             )
         }
