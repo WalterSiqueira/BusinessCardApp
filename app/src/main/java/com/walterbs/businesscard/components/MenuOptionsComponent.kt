@@ -1,5 +1,6 @@
 package com.walterbs.businesscard.components
 
+import android.content.res.Resources
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,7 @@ import androidx.navigation.NavController
 
 @Composable
 fun DrawerContent(navController: NavController, modifier: Modifier = Modifier) {
+    val deviceLang = Resources.getSystem().configuration.locales[0].language
     Box (
         contentAlignment = Alignment.Center,
         modifier = modifier
@@ -25,28 +27,54 @@ fun DrawerContent(navController: NavController, modifier: Modifier = Modifier) {
             .padding(top = 150.dp)
     ) {
         Column {
-            Text(
-                text = "Home",
-                fontSize = 35.sp,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .clickable { navController.navigate("home") }
-                    .padding(25.dp)
-                    .border(2.dp, Color.Black)
-                    .fillMaxWidth()
-            )
-            Text(
-                text = "Experiences",
-                fontSize = 35.sp,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .clickable { navController.navigate("experiences") }
-                    .padding(25.dp)
-                    .border(2.dp, Color.Black)
-                    .fillMaxWidth()
-            )
+
+            if (deviceLang == "pt") {
+                Text(
+                    text = "Página Inicial",
+                    fontSize = 35.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .clickable { navController.navigate("home") }
+                        .padding(25.dp)
+                        .border(2.dp, Color.Black)
+                        .fillMaxWidth()
+                )
+                Text(
+                    text = "Experiencias",
+                    fontSize = 35.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .clickable { navController.navigate("experiences") }
+                        .padding(25.dp)
+                        .border(2.dp, Color.Black)
+                        .fillMaxWidth()
+                )
+            } else {
+                Text(
+                    text = "Home",
+                    fontSize = 35.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .clickable { navController.navigate("home") }
+                        .padding(25.dp)
+                        .border(2.dp, Color.Black)
+                        .fillMaxWidth()
+                )
+                Text(
+                    text = "Experiences",
+                    fontSize = 35.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .clickable { navController.navigate("experiences") }
+                        .padding(25.dp)
+                        .border(2.dp, Color.Black)
+                        .fillMaxWidth()
+                )
+            }
         }
     }
 }

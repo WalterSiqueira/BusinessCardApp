@@ -1,5 +1,6 @@
 package com.walterbs.businesscard
 
+import android.content.res.Resources
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.walterbs.businesscard.components.DrawerContent
 import com.walterbs.businesscard.pages.ExperienceField
 import com.walterbs.businesscard.components.TopBar
+import com.walterbs.businesscard.pages.MainContentEN
 import com.walterbs.businesscard.pages.MainContentPTBR
 import kotlinx.coroutines.launch
 
@@ -48,7 +50,7 @@ fun Screen() {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
-    val isLandscape = LocalConfiguration.current.orientation == 2
+    val deviceLang = Resources.getSystem().configuration.locales[0].language
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -85,8 +87,14 @@ fun Screen() {
                     startDestination = "home",
                     modifier = Modifier.padding(padding)
                 ) {
-                    composable("home") {
-                        MainContentPTBR()
+                    if (deviceLang == "pt") {
+                        composable("home") {
+                            MainContentPTBR()
+                        }
+                    } else {
+                        composable("home") {
+                            MainContentEN()
+                        }
                     }
                     composable("experiences") {
                         ExperienceField()

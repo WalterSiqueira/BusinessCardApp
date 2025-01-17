@@ -1,5 +1,6 @@
 package com.walterbs.businesscard.components
 
+import android.content.res.Resources
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.sp
 fun TopBar(
     onOpenDrawer: () -> Unit,
 ) {
+    val deviceLang = Resources.getSystem().configuration.locales[0].language
     TopAppBar(
         navigationIcon = {
             Icon(
@@ -38,12 +40,21 @@ fun TopBar(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(
-                    text = "Business Card",
-                    fontSize = 30.sp,
-                    color = Color(0xFFFFFFFF)
+                if (deviceLang == "pt") {
+                    Text(
+                        text = "Cartão Profissional",
+                        fontSize = 30.sp,
+                        color = Color(0xFFFFFFFF)
 
-                )
+                    )
+                } else {
+                    Text(
+                        text = "Business Card",
+                        fontSize = 30.sp,
+                        color = Color(0xFFFFFFFF)
+
+                    )
+                }
             }
         },
         colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
