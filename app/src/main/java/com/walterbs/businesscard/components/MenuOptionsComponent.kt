@@ -51,6 +51,17 @@ fun DrawerContent(navController: NavController, modifier: Modifier = Modifier) {
                         .border(2.dp, Color.Black)
                         .fillMaxWidth()
                 )
+                Text(
+                    text = "Idiomas",
+                    fontSize = 35.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .clickable { navController.navigate("languages") }
+                        .padding(25.dp)
+                        .border(2.dp, Color.Black)
+                        .fillMaxWidth()
+                )
             } else {
                 Text(
                     text = "Home",
@@ -70,6 +81,17 @@ fun DrawerContent(navController: NavController, modifier: Modifier = Modifier) {
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .clickable { navController.navigate("experiences") }
+                        .padding(25.dp)
+                        .border(2.dp, Color.Black)
+                        .fillMaxWidth()
+                )
+                Text(
+                    text = "Languages",
+                    fontSize = 35.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .clickable { navController.navigate("languages") }
                         .padding(25.dp)
                         .border(2.dp, Color.Black)
                         .fillMaxWidth()

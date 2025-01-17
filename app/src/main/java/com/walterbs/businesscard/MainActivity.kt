@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.walterbs.businesscard.components.DrawerContent
 import com.walterbs.businesscard.pages.ExperienceField
 import com.walterbs.businesscard.components.TopBar
+import com.walterbs.businesscard.pages.LaguagePage
 import com.walterbs.businesscard.pages.MainContentEN
 import com.walterbs.businesscard.pages.MainContentPTBR
 import kotlinx.coroutines.launch
@@ -98,6 +99,9 @@ fun Screen() {
                     }
                     composable("experiences") {
                         ExperienceField()
+                    }
+                    composable("languages") {
+                        LaguagePage()
                     }
                 }
             }
