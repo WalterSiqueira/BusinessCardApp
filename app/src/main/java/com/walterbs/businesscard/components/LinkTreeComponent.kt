@@ -49,7 +49,6 @@ fun linkTree(link: String) {
                             context.startActivity(intent)
                         },
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFFFFFF)
                 )
             }
         }
@@ -75,7 +74,6 @@ fun linkTree(link: String) {
                             context.startActivity(intent)
                         },
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFFFFFF)
                 )
             }
         }

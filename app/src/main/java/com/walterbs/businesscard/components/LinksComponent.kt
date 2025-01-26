@@ -21,7 +21,7 @@ fun Links() {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 80.dp, bottom = 16.dp, start = 20.dp),
+                    .padding(top = 40.dp, bottom = 16.dp, start = 16.dp),
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

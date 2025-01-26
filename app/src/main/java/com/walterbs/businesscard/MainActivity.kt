@@ -6,8 +6,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
@@ -23,8 +27,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.walterbs.businesscard.components.DrawerContent
+import com.walterbs.businesscard.components.ProfPic
 import com.walterbs.businesscard.pages.ExperienceField
 import com.walterbs.businesscard.components.TopBar
 import com.walterbs.businesscard.pages.LaguagePage
@@ -52,19 +58,22 @@ fun Screen() {
     val scope = rememberCoroutineScope()
     val navController = rememberNavController()
     val deviceLang = Resources.getSystem().configuration.locales[0].language
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Image(
-            painter = painterResource(id = R.drawable._823ba68_b387_40d8_9b39_d9022ef863c7), // Substitua pelo seu recurso.
-            contentDescription = null,
-            contentScale = ContentScale.Crop, // Ajusta a imagem ao tamanho da tela.
-            modifier = Modifier.fillMaxSize()
+        if (navController.currentBackStackEntryAsState().value?.destination?.route == "home") {
+            ProfPic()
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
         )
         ModalNavigationDrawer(
             drawerState = drawerState,
             drawerContent = {
-                if (drawerState.isOpen) { // Renderiza o conteúdo do drawer apenas quando está aberto
+                if (drawerState.isOpen) {
                     DrawerContent(navController)
                 }
             }
@@ -72,36 +81,62 @@ fun Screen() {
             Scaffold(
                 containerColor = Color.Transparent,
                 topBar = {
-                    TopBar(
-                        onOpenDrawer = { // Ação para abrir ou fechar o drawer.
-                            scope.launch {
-                                drawerState.apply {
-                                    if (isClosed) drawerState.open() else drawerState.close()
-                                }
-                            }
-                        }
-                    )
+                    // Removido o conteúdo aqui para dividir a altura no layout principal.
                 }
             ) { padding ->
-                NavHost(
-                    navController = navController,
-                    startDestination = "home",
-                    modifier = Modifier.padding(padding)
+                BoxWithConstraints(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding)
                 ) {
-                    if (deviceLang == "pt") {
-                        composable("home") {
-                            MainContentPTBR()
-                        }
-                    } else {
-                        composable("home") {
-                            MainContentEN()
-                        }
+                    val topBarHeight = maxHeight * 0.25f // 20% da altura total
+                    val mainContentHeight = maxHeight * 1f // 80% da altura total
+
+                    // TopBar ocupando 20% da tela
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(topBarHeight)
+                    ) {
+                        TopBar(
+                            navController,
+                            onOpenDrawer = {
+                                scope.launch {
+                                    drawerState.apply {
+                                        if (isClosed) open() else close()
+                                    }
+                                }
+                            }
+                        )
                     }
-                    composable("experiences") {
-                        ExperienceField()
-                    }
-                    composable("languages") {
-                        LaguagePage()
+
+                    // Conteúdo principal ocupando os 80% restantes
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(mainContentHeight)
+                            .padding(top = topBarHeight) // Ajusta o conteúdo para não sobrepor a TopBar
+                    ) {
+                        NavHost(
+                            navController = navController,
+                            startDestination = "home"
+                        ) {
+                            if (deviceLang == "pt") {
+                                composable("home") {
+                                    MainContentPTBR()
+                                }
+                            } else {
+                                composable("home") {
+                                    MainContentEN()
+                                }
+                            }
+                            composable("experiences") {
+                                ExperienceField()
+                            }
+                            composable("languages") {
+                                LaguagePage()
+                            }
+                        }
                     }
                 }
             }

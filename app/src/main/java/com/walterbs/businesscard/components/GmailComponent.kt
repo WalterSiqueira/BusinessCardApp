@@ -52,7 +52,6 @@ fun GmailLink(link: String) {
                                 .show()
                         },
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFFFFFF)
                 )
             }
         }
@@ -80,7 +79,6 @@ fun GmailLink(link: String) {
                                 .show()
                         },
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFFFFFF)
                 )
             }
         }

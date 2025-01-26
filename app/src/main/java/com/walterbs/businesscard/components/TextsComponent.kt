@@ -10,35 +10,39 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.walterbs.businesscard.R
 
 @SuppressLint("SwitchIntDef")
 @Composable
 fun Texts(title: String, subTitle: String) {
     val configuration = LocalConfiguration.current
+    val monomaniacFont = FontFamily(Font(R.font.monomaniac_one))
     when (configuration.orientation) {
         android.content.res.Configuration.ORIENTATION_PORTRAIT -> {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 25.dp)
+                    .padding(top = 150.dp, bottom = 50.dp)
             ) {
                 Text(
                     text = title,
-                    fontSize = 46.sp,
+                    fontFamily = monomaniacFont,
+                    fontSize = 56.sp,
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFFFFFF)
                 )
                 Text(
                     text = subTitle,
-                    fontSize = 34.sp,
+                    fontFamily = monomaniacFont,
+                    fontSize = 44.sp,
                     modifier = Modifier
                         .padding(top = 5.dp),
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFFFFFF)
                 )
             }
         }
@@ -52,16 +56,16 @@ fun Texts(title: String, subTitle: String) {
                 Text(
                     text = title,
                     fontSize = 38.sp,
+                    fontFamily = monomaniacFont,
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFFFFFF)
                 )
                 Text(
                     text = subTitle,
                     fontSize = 28.sp,
+                    fontFamily = monomaniacFont,
                     modifier = Modifier
                         .padding(top = 5.dp),
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFFFFFF)
                 )
             }
         }
